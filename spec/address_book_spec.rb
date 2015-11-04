@@ -140,6 +140,14 @@ end
       book.import_from_csv("entries.csv")
       entry = book.binary_search("Billy")
       expect(entry).to be_nil
-    end  
+    end
+  end  
+
+  describe "#delete_entry" do
+    it "should delete all entries in the address book" do
+    book.add_entry('Ketan Shukla', '111-222-3333', 'ketankshukla2gmail.com')
+    book.add_entry('Ada Lovelace', '010.012.1815', 'augusta.king@lovelace.com')
+    book.nuke
+    expect(book.entries.size).to eq 0
   end
 end
