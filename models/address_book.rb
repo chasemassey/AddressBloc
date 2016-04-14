@@ -8,6 +8,10 @@ class AddressBook
     @entries = []
   end
 
+  def nuke_everything
+    @entries = []
+  end
+
   def remove_entry(name, phone_number, email)
     delete_entry = nil
 
@@ -39,4 +43,31 @@ class AddressBook
       add_entry(row_hash["name"], row_hash["phone_number"], row_hash["email"])
     end
   end
+
+    # Search AddressBook.entries for a specific entry by name
+  def binary_search(name)
+ # #1
+    lower = 0
+    upper = entries.length - 1
+
+ # #2
+    while lower <= upper
+ # #3
+      mid = (lower + upper) / 2
+      mid_name = entries[mid].name
+ 
+ # #4
+      if name == mid_name
+         return entries[mid]
+      elsif name < mid_name
+         upper = mid - 1
+      elsif name > mid_name
+         lower = mid + 1
+      end
+    end
+
+ # #5
+    return nil
+  end
+
 end
